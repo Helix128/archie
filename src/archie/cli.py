@@ -157,19 +157,19 @@ def locate():
 
 @task.command()
 @click.argument("name")
-@click.argument("command")
-def new(name, command):
+@click.argument("commands",nargs=-1)
+def new(name, commands):
   """Add a new task."""
-  create_task(name, command)
-  click.echo(click.style(f"Task '{name}' added with command: {command}", fg="white"))
+  create_task(name, commands)
+  click.echo(click.style(f"Task '{name}' added with command(s): {', '.join(commands)}", fg="white"))
 
 @task.command()
 @click.argument("name")
-@click.argument("command")
-def append(name, command):
+@click.argument("commands", nargs=-1)
+def append(name, commands):
   """Append a command to an existing task."""
-  if append_task(name, command):
-    click.echo(click.style(f"Appended command to task '{name}': {command}", fg="white"))
+  if append_task(name, commands):
+    click.echo(click.style(f"Appended command(s) to task '{name}': {commands}", fg="white"))
   else:
     click.echo(click.style(f"Task '{name}' not found.", fg="red"))
 
@@ -188,7 +188,7 @@ def rename(old_name, new_name):
 def delete(name):
   """Delete an existing task."""
   if delete_task(name):
-    click.echo(click.style(f"Task '{name}' removed.", fg="white"))
+    click.echo(click.style(f"Task '{name}' deleted.", fg="white"))
   else:
     click.echo(click.style(f"Task '{name}' not found.", fg="red"))
 

@@ -11,21 +11,21 @@ def _ensure_task_file_exists():
         os.makedirs(os.path.dirname(task_file), exist_ok=True)
     subprocess.run(['sudo', 'touch', task_file], check=True)
 
-def create_task(name, command):
+def create_task(name, commands):
     _ensure_task_file_exists()
     tasks = load_tasks()
     if name not in tasks:
-        tasks[name] = [command]
+        tasks[name] = commands
         save_tasks()
         return True
     else:
         return False
     
-def append_task(name, command):
+def append_task(name, commands):
     _ensure_task_file_exists()
     tasks = load_tasks()
     if name in tasks:
-        tasks[name].append(command)
+        tasks[name].extend(commands)
         save_tasks()
         return True
     else:

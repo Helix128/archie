@@ -4,7 +4,7 @@
 # Features
 - Environment variable management
 - Disk info visualization
-- Custom macros/aliases
+- Custom tasks
 
 # Installation
 ## Installation using pipx:
@@ -30,6 +30,19 @@ archie disk list
 
 # Show detailed info about all disks
 archie disk info --all
+
+## Task module (task)
+# List all tasks
+archie task list
+
+# Create a new task
+archie task create <task_name> <command1> [<command2> ...]
+
+# Run a specific task
+archie task run <task_name> 
+# OR
+archie pls <task_name>
+
 ```
 
 # Why?
