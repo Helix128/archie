@@ -6,8 +6,8 @@
 - more to come soon...
 
 # Installation
+## Installation using pipx:
 ```bash
-# Install archie via pipx
 pipx install git+https://github.com/Helix128/archie.git
 ```
 

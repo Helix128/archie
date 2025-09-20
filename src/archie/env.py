@@ -36,8 +36,8 @@ def set_env_var(var_name, var_value):
     if not found:
         lines.append(f'{var_name}="{var_value}"\n')
 
-    with open(env_file, 'w') as file:
-        file.writelines(lines)
+    content = ''.join(lines)
+    subprocess.run(['sudo', 'tee', env_file], input=content, text=True, check=True)
     subprocess.run(['source', env_file], shell=True, executable='/bin/bash')
 
 def del_env_var(var_name):
