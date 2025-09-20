@@ -42,10 +42,10 @@ def set(key, value):
 
 @env.command()
 @click.argument("key")
-def remove(key):
-  """Remove a global environment variable."""
+def delete(key):
+  """Delete a global environment variable."""
   del_env_var(key)
-  click.echo(f"Removed {key}")
+  click.echo(f"Deleted {key}")
 
 @env.command()
 def list():
