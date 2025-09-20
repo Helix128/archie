@@ -1,6 +1,6 @@
 [project]
-name = "archie"
-version = "0.2.4" 
+name = "archie-cli"
+version = "0.3.0" 
 description = ""
 authors = [
     {name = "Helix128"}

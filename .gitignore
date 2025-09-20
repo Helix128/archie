@@ -1,6 +1,9 @@
 # vscode settings
 .vscode/
 
+# builds
+dist/
+
 # python cache
 __pycache__/
 *.pyc
