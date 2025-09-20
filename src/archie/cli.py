@@ -25,7 +25,7 @@ def help():
   click.echo(cli.get_help(click.Context(cli)))
 
 @cli.command()
-def about():
+def info():
   """About Archie."""
   click.echo(click.style("Archie version: ", fg="cyan"), nl=False)
   click.echo(f"{importlib.metadata.version(APP_NAME)}")
