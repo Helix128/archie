@@ -1,8 +1,10 @@
 import click
 import importlib.metadata
-from env import *
-from disk import *
 from difflib import get_close_matches
+
+# archie modules
+from .env import *
+from .disk import *
 
 @click.group()
 def cli():
@@ -112,5 +114,6 @@ def info(name, all):
       else:
         click.echo(f"Disk '{name}' not found.")
 #endregion
+
 if __name__ == "__main__":
   cli()
