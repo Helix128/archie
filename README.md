@@ -27,8 +27,8 @@ archie env set <key> <value>
 # List available disks
 archie disk list
 
-# Show detailed info about a specific disk
-archie disk info <name>
+# Show detailed info about all disks
+archie disk info -all
 ```
 
 # Why?
