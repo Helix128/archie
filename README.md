@@ -1,4 +1,4 @@
-# archie-cli
+# archie
 ## A command line tool to make managing your Linux system easier
 
 # Features
