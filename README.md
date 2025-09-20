@@ -13,7 +13,7 @@ pipx install archie-cli
 ```
 
 # Example usage
-```python
+```bash
 # Help
 archie --help
 # or
