@@ -1,5 +1,5 @@
 # archie
-## A command line tool to make managing your Linux system easier
+A command line tool to make managing your Linux system easier
 
 # Features
 - Environment variable management
