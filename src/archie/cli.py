@@ -61,9 +61,8 @@ def list():
   click.echo("environment variable(s):")
   if vars:
     for var in vars:
-      exportIndex = var.index("export")
-      varName = var[exportIndex + len("export "):].split('=', 1)[0].strip()
-      varValue = var[exportIndex + len("export "):].split('=', 1)[1].strip().strip('"')
+      varName = var.split('=', 1)[0].strip()
+      varValue = var.split('=', 1)[1].strip().strip('"')
       click.echo(click.style(f"{varName}={varValue}", fg="white"))
       
 #endregion
