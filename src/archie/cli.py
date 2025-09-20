@@ -100,6 +100,7 @@ def list():
 @click.argument("name", required=False)
 @click.option("--all", is_flag=True, help="Show all disks")
 def info(name, all):
+  """Show detailed information about a disk."""
   disks = get_disks()
   if all:
     for disk in disks:
@@ -125,6 +126,13 @@ def info(name, all):
       if all_names:
         closest = get_close_matches(name_lower, [n.lower() for n in all_names], n=3, cutoff=0.6)
         if closest:
+          if len(closest) == 1:
+            original_match = next(n for n in all_names if n.lower() == closest[0])
+            matching_disk = next((d for d in disks if d.get('name', '').lower() == closest[0] or d.get('model', '').lower() == closest[0]), None)
+            if matching_disk:
+              click.echo(f"Did you mean '{original_match}'? Showing info:")
+              print_disk_info(matching_disk)
+            return
           original_matches = [next(n for n in all_names if n.lower() == match) for match in closest]
           click.echo(f"Disk '{name}' not found. Closest matches: {', '.join(original_matches)}")
         else:
