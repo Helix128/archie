@@ -33,7 +33,7 @@ def get(key):
   """Get an environment variable value."""
   result = get_env_var(key)
   if result is not None:
-    click.echo(click.style(f"{key}={result}", fg="white"))
+    click.echo(click.style(f"{key} = {result}", fg="white"))
   else:
     click.echo(click.style(f"{key} not found.", fg="red"))
 
@@ -58,13 +58,13 @@ def list():
   vars = list_env_vars()
   click.echo("Found",nl=False)
   click.echo(click.style(f" {len(vars)} ", fg="cyan"), nl=False)
-  click.echo("environment variables:")
+  click.echo("environment variable(s):")
   if vars:
     for var in vars:
       exportIndex = var.index("export")
       varName = var[exportIndex + len("export "):].split('=', 1)[0].strip()
       varValue = var[exportIndex + len("export "):].split('=', 1)[1].strip().strip('"')
-      click.echo(click.style(f"{varName} -> {varValue}", fg="white"))
+      click.echo(click.style(f"{varName} = {varValue}", fg="white"))
 #endregion
 #region disk
 @cli.group()
