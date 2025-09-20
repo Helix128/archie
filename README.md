@@ -12,7 +12,7 @@
 pipx install archie-cli
 ```
 
-# Usage
+# Example usage
 ```python
 # Help
 archie --help
