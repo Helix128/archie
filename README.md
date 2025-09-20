@@ -8,7 +8,7 @@
 # Installation
 ## Installation using pipx:
 ```bash
-pipx install git+https://github.com/Helix128/archie.git
+pipx install archie-cli
 ```
 
 # Usage

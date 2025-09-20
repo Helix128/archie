@@ -4,7 +4,6 @@ import os
 env_file = "/etc/profile.d/archie.sh"
 
 def _ensure_env_file_exists():
-    """Ensure the environment file exists, create it if it doesn't."""
     if not os.path.exists(env_file):
         subprocess.run(['sudo', 'touch', env_file], check=True)
 
