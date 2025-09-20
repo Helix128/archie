@@ -14,12 +14,12 @@ pipx install archie-cli
 
 # Example usage
 ```bash
-# See command list
+# See help
 archie --help
 # or
 archie help
 
-# About
+# About 
 archie info
 
 ## Environment module (env)
