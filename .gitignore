@@ -3,6 +3,7 @@
 
 # builds
 dist/
+builds/
 
 # bash tools
 *.sh
