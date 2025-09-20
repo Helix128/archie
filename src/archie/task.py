@@ -76,6 +76,6 @@ def save_tasks():
     content = json.dumps(tasks, indent=4)
     subprocess.run(['sudo', 'tee', task_file], input=content, text=True, check=True, stdout=subprocess.DEVNULL)
 
-def edit_task_file():
+def locate_task_file():
     _ensure_task_file_exists()
-    subprocess.call(("xdg-open", task_file))
+    return task_file

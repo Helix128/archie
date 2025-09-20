@@ -152,8 +152,8 @@ def task():
 @task.command()
 def locate():
   """Open the task configuration file."""
-  edit_task_file()
-  click.echo(click.style(f"Opened task configuration file: {task_file}", fg="white"))
+  task_file = locate_task_file()
+  click.echo(click.style(f"Task configuration file located at: {task_file}", fg="white"))
 
 @task.command()
 @click.argument("name")
