@@ -3,8 +3,8 @@ import importlib.metadata
 from difflib import get_close_matches
 
 # archie modules
-from .env import *
-from .disk import *
+from env import *
+from disk import *
 
 @click.group()
 def cli():
@@ -13,7 +13,7 @@ def cli():
 #region core
 @cli.command()
 def version():
-  """Get current installed Archie version"""
+  """Get installed Archie version."""
   click.echo(f"{importlib.metadata.version('archie')}")
 
 @cli.command()
@@ -87,7 +87,9 @@ def info(name, all):
   disks = get_disks()
   if all:
     for disk in disks:
+      click.echo("-"*30)
       print_disk_info(disk)
+    click.echo("-"*30)
   else:
     if not name:
       click.echo("Disk name is required if --all is not specified.")
