@@ -2,7 +2,7 @@
 ## A command line tool to make managing your Linux system easier
 
 # Features
-- User environment variable management
+- Environment variable management
 - Disk info visualization
 
 # Installation

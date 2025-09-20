@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-env_file = "/etc/profile.d/archie.sh"
+env_file = "/etc/environment"
 
 def _ensure_env_file_exists():
     if not os.path.exists(env_file):

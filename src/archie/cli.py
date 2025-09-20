@@ -24,7 +24,7 @@ def help():
 #region env
 @cli.group()
 def env():
-  """Manage profile environment variables."""
+  """Manage environment variables."""
   pass
 
 @env.command()
