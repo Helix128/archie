@@ -6,6 +6,7 @@ from .env import *
 def cli():
   pass
 
+#region core
 @cli.command()
 def version():
   """Get current installed Archie version"""
@@ -15,7 +16,7 @@ def version():
 def help():
   """Show this message and exit."""
   click.echo(cli.get_help(click.Context(cli)))
-
+#endregion
 #region env
 @cli.group()
 def env():
@@ -56,6 +57,7 @@ def list():
     for var in vars:
       click.echo(var)
 #endregion
-
+#region disk
+#endregion
 if __name__ == "__main__":
   cli()
