@@ -14,12 +14,9 @@ def _ensure_task_file_exists():
 def create_task(name, commands):
     _ensure_task_file_exists()
     tasks = load_tasks()
-    if name not in tasks:
-        tasks[name] = commands
-        save_tasks()
-        return True
-    else:
-        return False
+    tasks[name] = commands
+    save_tasks()
+
     
 def append_task(name, commands):
     _ensure_task_file_exists()

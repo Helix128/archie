@@ -158,12 +158,13 @@ def locate():
 @task.command()
 @click.argument("name")
 @click.argument("commands",nargs=-1)
-def new(name, commands):
-  """Add a new task."""
+def set(name, commands):
+  """Create a new task or overwrite an existing one."""
   if create_task(name, commands):
-    click.echo(click.style(f"Task '{name}' added with command(s): {', '.join(commands)}", fg="white"))
+    click.echo(click.style(f"Task '{name}' defined with command(s): {', '.join(commands)}", fg="white"))
   else:
     click.echo(click.style(f"Task '{name}' already exists.", fg="red"))
+
 @task.command()
 @click.argument("name")
 @click.argument("commands", nargs=-1)
