@@ -37,8 +37,7 @@ def set_env_var(var_name, var_value):
         lines.append(f'{var_name}="{var_value}"\n')
 
     content = ''.join(lines)
-    subprocess.run(['sudo', 'tee', env_file], input=content, text=True, check=True)
-    subprocess.run(['source', env_file], shell=True, executable='/bin/bash')
+    subprocess.run(['sudo', 'tee', env_file], input=content, text=True, check=True, stdout=subprocess.DEVNULL)
 
 def del_env_var(var_name):
     lines = []
@@ -49,6 +48,5 @@ def del_env_var(var_name):
     except FileNotFoundError:
         pass
 
-    with open(env_file, 'w') as file:
-        file.writelines(lines)
-    subprocess.run(['source', env_file], shell=True, executable='/bin/bash')
+    content = ''.join(lines)
+    subprocess.run(['sudo', 'tee', env_file], input=content, text=True, check=True, stdout=subprocess.DEVNULL)
