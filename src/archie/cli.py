@@ -5,6 +5,10 @@ from .env import *
 def cli():
   pass
 
+@cli.command()
+def version():
+  click.echo(f"Archie CLI Version {__version__}")
+
 #region env
 @cli.group()
 def env():
