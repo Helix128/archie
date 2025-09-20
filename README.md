@@ -38,5 +38,3 @@ I began using Arch (btw) recently and while it has a **ton** of tools available 
 This tool doesn't have many features as of now and it should work on most Linux distros other than Arch, but I can't guarantee I wont add Arch-specific features in the future.
 I'd really love to hear your feedback and suggestions for new features, so feel absolutely free to open an issue or a PR!
 
-In loving memory of my aunt's late dog, **Archie**.
-
