@@ -38,13 +38,13 @@ archie task list
 
 # Create new tasks
 # Single command
-archie task new diskinfo "archie disk info --all"
+archie task set diskinfo "archie disk info --all"
 
 # Multiple commands
-archie task new archieinfo "echo Showing Archie info..." "archie about"
+archie task set archieinfo "echo Showing Archie info..." "archie about"
 
 # This also works
-archie task new "disk all" "archie disk list" "archie disk info --all"
+archie task set "disk all" "archie disk list" "archie disk info --all"
 
 # Run a specific task
 archie task run diskinfo 
