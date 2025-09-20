@@ -1,4 +1,5 @@
 import click
+import importlib.metadata
 from .env import *
 
 @click.group()
@@ -7,7 +8,7 @@ def cli():
 
 @cli.command()
 def version():
-  click.echo(f"Archie CLI Version {__version__}")
+  click.echo(f"{importlib.metadata.version('archie')}")
 
 #region env
 @cli.group()
