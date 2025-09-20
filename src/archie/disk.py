@@ -44,14 +44,17 @@ def get_disks():
             "model": disk.get("model", "") or "Unknown",
             "used": 0,
             "size": disk_size,
+            "unpartitioned": 0,
             "partitions": []
         }
         
         total_used = 0
+        total_partitioned = 0
         
         if "children" in disk:
             for partition in disk["children"]:
                 partition_size = parse_size_to_bytes(partition["size"])
+                total_partitioned += partition_size
                 
                 partition_obj = { 
                     "name": partition["name"].upper(),
@@ -79,6 +82,7 @@ def get_disks():
                 disk_obj["partitions"].append(partition_obj)
         
         disk_obj["used"] = total_used
+        disk_obj["unpartitioned"] = disk_size - total_partitioned
         disks.append(disk_obj)
     
     return disks
@@ -106,5 +110,11 @@ def print_disk_info(disk):
     if disk["partitions"]:
         for partition in disk["partitions"]:
             click.echo(f"- {partition["name"].lower()} ({parse_bytes(partition["used"])} / {parse_bytes(partition["size"])}) [{partition["mountpoint"]}]")
+        
+        if disk["unpartitioned"] > 0:
+            click.echo(f"- unpartitioned ({parse_bytes(disk["unpartitioned"])})")
     else:
-        click.echo(click.style("None", fg="yellow"))
+        if disk["unpartitioned"] > 0:
+            click.echo(f"- unpartitioned ({parse_bytes(disk["unpartitioned"])})")
+        else:
+            click.echo(click.style("None", fg="yellow"))
