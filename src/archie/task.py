@@ -61,9 +61,9 @@ def load_tasks():
 def run_task(name):
     tasks = load_tasks()
     if name in tasks:
-        for command in tasks[name]:
-            click.echo(click.style(f"$ {command}", fg="cyan", bold=True))
-            subprocess.run(command, shell=True)
+        combined_command = " && ".join(tasks[name])
+        click.echo(click.style(f"$ {combined_command}", fg="cyan", bold=True))
+        subprocess.run(combined_command, shell=True)
         return True
     else:
         return False

@@ -211,20 +211,19 @@ def list():
 @click.argument("name")
 def run(name):
   """Run a task."""
-  if run_task(name):
-    click.echo(click.style(f"Task '{name}' done.", fg="white"))
-  else:
-    click.echo(click.style(f"Task '{name}' not found.", fg="red"))
+  run_task_internal(name)
 
 @cli.command()
 @click.argument("name")
 def pls(name):
   """Run a task."""
+  run_task_internal(name)
+
+def run_task_internal(name):
   if run_task(name):
     click.echo(click.style(f"Task '{name}' done.", fg="white"))
   else:
     click.echo(click.style(f"Task '{name}' not found.", fg="red"))
-
 #endregion
 
 if __name__ == "__main__":
