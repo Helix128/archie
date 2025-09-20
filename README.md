@@ -4,6 +4,7 @@
 # Features
 - Environment variable management
 - Disk info visualization
+- Custom macros/aliases
 
 # Installation
 ## Installation using pipx:

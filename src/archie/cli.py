@@ -2,9 +2,12 @@ import click
 import importlib.metadata
 from difflib import get_close_matches
 
+APP_NAME = "archie-cli"
+
 # archie modules
 from .env import *
 from .disk import *
+from .task import *
 
 @click.group()
 def cli():
@@ -14,7 +17,7 @@ def cli():
 @cli.command()
 def version():
   """Get installed Archie version."""
-  click.echo(f"{importlib.metadata.version('archie-cli')}")
+  click.echo(f"{importlib.metadata.version(APP_NAME)}")
 
 @cli.command()
 def help():
@@ -25,7 +28,7 @@ def help():
 def about():
   """About Archie."""
   click.echo(click.style("Archie version: ", fg="cyan"), nl=False)
-  click.echo(f"{importlib.metadata.version('archie-cli')}")
+  click.echo(f"{importlib.metadata.version(APP_NAME)}")
   click.echo(click.style("GitHub repo: ", fg="cyan"), nl=False)
   click.echo("https://github.com/helix128/archie")
   click.echo("Made with <3 by ",nl=False)
@@ -139,6 +142,89 @@ def info(name, all):
           click.echo(f"Disk '{name}' not found.")
       else:
         click.echo(f"Disk '{name}' not found.")
+#endregion
+#region task
+@cli.group()
+def task():
+  """Manage custom tasks."""
+  pass
+
+@task.command()
+def locate():
+  """Open the task configuration file."""
+  edit_task_file()
+  click.echo(click.style(f"Opened task configuration file: {task_file}", fg="white"))
+
+@task.command()
+@click.argument("name")
+@click.argument("command")
+def new(name, command):
+  """Add a new task."""
+  create_task(name, command)
+  click.echo(click.style(f"Task '{name}' added with command: {command}", fg="white"))
+
+@task.command()
+@click.argument("name")
+@click.argument("command")
+def append(name, command):
+  """Append a command to an existing task."""
+  if append_task(name, command):
+    click.echo(click.style(f"Appended command to task '{name}': {command}", fg="white"))
+  else:
+    click.echo(click.style(f"Task '{name}' not found.", fg="red"))
+
+@task.command()
+@click.argument("old_name")
+@click.argument("new_name")
+def rename(old_name, new_name):
+  """Rename an existing task."""
+  if rename_task(old_name, new_name):
+    click.echo(click.style(f"Task '{old_name}' renamed to '{new_name}'.", fg="white"))
+  else:
+    click.echo(click.style(f"Task '{old_name}' not found or '{new_name}' already exists.", fg="red"))
+
+@task.command()
+@click.argument("name")
+def delete(name):
+  """Delete an existing task."""
+  if delete_task(name):
+    click.echo(click.style(f"Task '{name}' removed.", fg="white"))
+  else:
+    click.echo(click.style(f"Task '{name}' not found.", fg="red"))
+
+@task.command()
+def list():
+  """List all tasks."""
+  tasks = load_tasks()
+  if tasks:
+    click.echo(f"Found ",nl=False)
+    click.echo(click.style(f"{len(tasks)}", fg="cyan"), nl=False)
+    click.echo(" task(s):")
+    for name, commands in tasks.items():
+      click.echo(click.style(f"- {name}:", fg="cyan"))
+      for cmd in commands:
+        click.echo(click.style(f"  - {cmd}", fg="white"))
+  else:
+    click.echo("No tasks found.")
+
+@task.command()
+@click.argument("name")
+def run(name):
+  """Run a task."""
+  if run_task(name):
+    click.echo(click.style(f"Task '{name}' done.", fg="white"))
+  else:
+    click.echo(click.style(f"Task '{name}' not found.", fg="red"))
+
+@cli.command()
+@click.argument("name")
+def pls(name):
+  """Run a task."""
+  if run_task(name):
+    click.echo(click.style(f"Task '{name}' done.", fg="white"))
+  else:
+    click.echo(click.style(f"Task '{name}' not found.", fg="red"))
+
 #endregion
 
 if __name__ == "__main__":
