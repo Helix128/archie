@@ -10,7 +10,7 @@ def _ensure_env_file_exists():
 def list_env_vars():
     try:
         with open(env_file, 'r') as file:
-            return [line.strip() for line in file if line.strip().startswith('export ') and '=' in line and not line.strip().startswith('#')]
+            return [line.strip() for line in file if line.strip() and '=' in line and not line.strip().startswith('#')]
     except FileNotFoundError:
         return []
 
@@ -18,7 +18,7 @@ def get_env_var(var_name):
     try:
         with open(env_file, 'r') as file:
             for line in file:
-                if line.startswith(f"export {var_name}="):
+                if line.startswith(f"{var_name}="):
                     return line.strip().split('=', 1)[1].strip('"')
     except FileNotFoundError:
         pass
@@ -32,12 +32,12 @@ def set_env_var(var_name, var_value):
         with open(env_file, 'r') as file:
             lines = file.readlines()
             for i, line in enumerate(lines):
-                if line.startswith(f"export {var_name}="):
+                if line.startswith(f"{var_name}="):
                     try:
                         float(var_value)
-                        lines[i] = f'export {var_name}={var_value}\n'
+                        lines[i] = f'{var_name}={var_value}\n'
                     except (ValueError, TypeError):
-                        lines[i] = f'export {var_name}="{var_value}"\n'
+                        lines[i] = f'{var_name}="{var_value}"\n'
                     found = True
                     break
     except FileNotFoundError:
@@ -46,9 +46,9 @@ def set_env_var(var_name, var_value):
     if not found:
         try:
             float(var_value)
-            lines.append(f'export {var_name}={var_value}\n')
+            lines.append(f'{var_name}={var_value}\n')
         except (ValueError, TypeError):
-            lines.append(f'export {var_name}="{var_value}"\n')
+            lines.append(f'{var_name}="{var_value}"\n')
 
     content = ''.join(lines)
     subprocess.run(['sudo', 'tee', env_file], input=content, text=True, check=True, stdout=subprocess.DEVNULL)
@@ -59,7 +59,7 @@ def del_env_var(var_name):
     try:
         with open(env_file, 'r') as file:
             lines = file.readlines()
-            lines = [line for line in lines if not line.startswith(f"export {var_name}=")]
+            lines = [line for line in lines if not line.startswith(f"{var_name}=")]
     except FileNotFoundError:
         pass
 
