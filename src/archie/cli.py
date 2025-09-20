@@ -3,8 +3,8 @@ import importlib.metadata
 from difflib import get_close_matches
 
 # archie modules
-from env import *
-from disk import *
+from .env import *
+from .disk import *
 
 @click.group()
 def cli():

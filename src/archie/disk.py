@@ -34,7 +34,6 @@ def parse_bytes(size_bytes):
 def get_disks():
     output = subprocess.check_output(["lsblk", "-J", "-o", "NAME,SIZE,MODEL,MOUNTPOINT"]).decode()
     data = json.loads(output)
-    
     disks = []
 
     for disk in data["blockdevices"]:
@@ -87,18 +86,23 @@ def get_disks():
 def print_disk_info(disk):
     click.echo(click.style(f"{disk["model"]} ({disk["name"].lower()})", fg="cyan"))
     click.echo(f"Size: {parse_bytes(disk["size"])}")
+
     usage_pct = (disk["used"] / disk["size"] * 100) if disk["size"] > 0 else 0
     usage_color = "white" if usage_pct < 70 else "yellow" if usage_pct < 90 else "red"
+
     click.echo("Used: ", nl=False)
     click.echo(click.style(f"{parse_bytes(disk["used"])} ({usage_pct:.2f}%)", fg=usage_color))
     click.echo(" [", nl=False)
+
     for i in range(0,20):
         if (i / 20 * 100) < usage_pct:
             click.echo(click.style("▰", fg=usage_color), nl=False)
         else:
             click.echo("▱", nl=False)
+
     click.echo("]")
     click.echo(f"Partitions:")
+    
     if disk["partitions"]:
         for partition in disk["partitions"]:
             click.echo(f"- {partition["name"].lower()} ({parse_bytes(partition["used"])} / {parse_bytes(partition["size"])}) [{partition["mountpoint"]}]")
