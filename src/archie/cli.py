@@ -156,7 +156,7 @@ def locate():
   click.echo(click.style(f"Task configuration file located at: {task_file}", fg="white"))
 
 @task.command()
-@click.argument("name")
+@click.argument("name", required=True)
 @click.argument("commands",nargs=-1)
 def set(name, commands):
   """Create a new task or overwrite an existing one."""
@@ -164,7 +164,7 @@ def set(name, commands):
   click.echo(click.style(f"Task '{name}' defined with command(s): {', '.join(commands)}", fg="white"))
 
 @task.command()
-@click.argument("name")
+@click.argument("name", required=True)
 @click.argument("commands", nargs=-1)
 def append(name, commands):
   """Append a command to an existing task."""
@@ -174,8 +174,8 @@ def append(name, commands):
     click.echo(click.style(f"Task '{name}' not found.", fg="red"))
 
 @task.command()
-@click.argument("old_name")
-@click.argument("new_name")
+@click.argument("old_name", required=True)
+@click.argument("new_name", required=True)
 def rename(old_name, new_name):
   """Rename an existing task."""
   if rename_task(old_name, new_name):
@@ -184,7 +184,7 @@ def rename(old_name, new_name):
     click.echo(click.style(f"Task '{old_name}' not found or '{new_name}' already exists.", fg="red"))
 
 @task.command()
-@click.argument("name")
+@click.argument("name", required=True)
 def delete(name):
   """Delete an existing task."""
   if delete_task(name):
@@ -208,13 +208,13 @@ def list():
     click.echo("No tasks found.")
 
 @task.command()
-@click.argument("name")
+@click.argument("name", required=True)
 def run(name):
   """Run a task."""
   run_task_internal(name)
 
 @cli.command()
-@click.argument("name")
+@click.argument("name", required=True)
 def pls(name):
   """Run a task."""
   run_task_internal(name)
