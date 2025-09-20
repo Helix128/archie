@@ -4,7 +4,7 @@
 # Features
 - Environment variable management
 - Disk info visualization
-- Custom task (alias) system
+- Custom command system
 
 # Installation
 ## Installation using pipx:
