@@ -23,7 +23,7 @@ archie env list
 
 # Add or update an env variable
 archie env set TEST_ENV 25 # TEST_ENV=25
-archie env set SUPER_DUPER_SECRET "lmao" # SUPER_DUPER_SECRET="lmao"
+archie env set SUPER_DUPER_SECRET password # SUPER_DUPER_SECRET="password"
 
 ## Disk module (disk)
 # List available disks
@@ -38,13 +38,13 @@ archie task list
 
 # Create new tasks
 # Single command
-archie task create diskinfo "archie disk info --all"
+archie task new diskinfo "archie disk info --all"
 
 # Multiple commands
-archie task create about-archie "echo Showing Archie info..." "archie about"
+archie task new archieinfo "echo Showing Archie info..." "archie about"
 
 # This also works
-archie task create "disk all" "archie disk list" "archie disk info --all"
+archie task new "disk all" "archie disk list" "archie disk info --all"
 
 # Run a specific task
 archie task run diskinfo 
@@ -54,7 +54,7 @@ archie pls diskinfo
 # This also works
 archie pls "disk all"
 
-# Open Archie task file (for sharing or manual edits)
+# Find Archie task file (for sharing or manual edits)
 archie task locate
 
 ```
