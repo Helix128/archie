@@ -27,14 +27,20 @@ def set_env_var(var_name, var_value):
             lines = file.readlines()
             for i, line in enumerate(lines):
                 if line.startswith(f"{var_name}="):
-                    lines[i] = f'{var_name}="{var_value}"\n'
+                    if isinstance(var_value, (int, float)):
+                        lines[i] = f'{var_name}={var_value}\n'
+                    else:
+                        lines[i] = f'{var_name}="{var_value}"\n'
                     found = True
                     break
     except FileNotFoundError:
         pass
 
     if not found:
-        lines.append(f'{var_name}="{var_value}"\n')
+        if isinstance(var_value, (int, float)):
+            lines.append(f'{var_name}={var_value}\n')
+        else:
+            lines.append(f'{var_name}="{var_value}"\n')
 
     content = ''.join(lines)
     subprocess.run(['sudo', 'tee', env_file], input=content, text=True, check=True, stdout=subprocess.DEVNULL)

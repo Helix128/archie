@@ -38,7 +38,7 @@ def get(key):
 def set(key, value):
   """Set a global environment variable."""
   set_env_var(key, value)
-  click.echo(f"Set {key}={value}")
+  click.echo(f"{key}={value}")
 
 @env.command()
 @click.argument("key")
