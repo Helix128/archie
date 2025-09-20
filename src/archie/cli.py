@@ -14,7 +14,7 @@ def cli():
 @cli.command()
 def version():
   """Get installed Archie version."""
-  click.echo(f"{importlib.metadata.version('archie')}")
+  click.echo(f"{importlib.metadata.version('archie-cli')}")
 
 @cli.command()
 def help():
@@ -65,6 +65,7 @@ def list():
       varName = var[exportIndex + len("export "):].split('=', 1)[0].strip()
       varValue = var[exportIndex + len("export "):].split('=', 1)[1].strip().strip('"')
       click.echo(click.style(f"{varName} = {varValue}", fg="white"))
+      
 #endregion
 #region disk
 @cli.group()
