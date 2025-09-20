@@ -8,6 +8,7 @@ def cli():
 
 @cli.command()
 def version():
+  """Get current installed Archie version"""
   click.echo(f"{importlib.metadata.version('archie')}")
 
 #region env
