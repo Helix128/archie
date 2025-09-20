@@ -33,9 +33,9 @@ def get(key):
   """Get a global environment variable value."""
   result = get_env_var(key)
   if result is not None:
-    click.echo(f"{key}={result}")
+    click.echo(click.style(f"{key}={result}", fg="cyan"))
   else:
-    click.echo(f"{key} not found.")
+    click.echo(click.style(f"{key} not found.", fg="red"))
 
 @env.command()
 @click.argument("key")
@@ -43,23 +43,25 @@ def get(key):
 def set(key, value):
   """Set a global environment variable."""
   set_env_var(key, value)
-  click.echo(f"{key}={value}")
+  click.echo(click.style(f"{key}={value}", fg="cyan"))
 
 @env.command()
 @click.argument("key")
 def delete(key):
   """Delete a global environment variable."""
   del_env_var(key)
-  click.echo(f"Deleted {key}")
+  click.echo(click.style(f"Deleted {key}", fg="green"))
 
 @env.command()
 def list():
   """List all global environment variables."""
   vars = list_env_vars()
-  click.echo(f"Found {len(vars)} global environment variables:")
+  click.echo("Found",nl=False)
+  click.echo(click.style(f" {len(vars)} ", fg="cyan"), nl=False)
+  click.echo("global environment variables:")
   if vars:
     for var in vars:
-      click.echo(var)
+      click.echo(click.style(var, fg="cyan"))
 #endregion
 #region disk
 @cli.group()
