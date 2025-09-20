@@ -12,7 +12,7 @@ pipx install git+https://github.com/Helix128/archie.git
 ```
 
 # Usage
-```bash
+```python
 # Help
 archie --help
 
