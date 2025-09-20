@@ -4,6 +4,9 @@
 # builds
 dist/
 
+# bash tools
+*.sh
+
 # python cache
 __pycache__/
 *.pyc
