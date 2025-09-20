@@ -3,7 +3,7 @@ name = "archie"
 version = "0.1.2"
 description = ""
 authors = [
-    {name = "Helix128",email = "diegoatari8@gmail.com"}
+    {name = "Helix128"}
 ]
 readme = "README.md"
 requires-python = ">=3.13"
