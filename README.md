@@ -14,7 +14,7 @@ pipx install archie-cli
 
 # Example usage
 ```bash
-# Help
+# See command list
 archie --help
 # or
 archie help
