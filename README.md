@@ -3,7 +3,7 @@
 
 # Features
 - Global environment variable management
-- more to come soon...
+- Disk info visualization
 
 # Installation
 ## Installation using pipx:
@@ -17,8 +17,18 @@ pipx install git+https://github.com/Helix128/archie.git
 archie --help
 
 ## Environment module (env)
-# Example (listing env variables)
+# List env variables
 archie env list
+
+# Add or update an env variable
+archie env set <key> <value>
+
+## Disk module (disk)
+# List available disks
+archie disk list
+
+# Show detailed info about a specific disk
+archie disk info <name>
 ```
 
 # Why?

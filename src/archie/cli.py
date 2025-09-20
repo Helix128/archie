@@ -1,6 +1,8 @@
 import click
 import importlib.metadata
-from .env import *
+from env import *
+from disk import *
+from difflib import get_close_matches
 
 @click.group()
 def cli():
@@ -58,6 +60,57 @@ def list():
       click.echo(var)
 #endregion
 #region disk
+@cli.group()
+def disk():
+  """Manage disks."""
+  pass
+@disk.command()
+def list():
+  """List all disks."""
+  disks = get_disks()
+  click.echo(f"Found {len(disks)} disks:")
+  if disks:
+    for disk in disks:
+      disk_name = disk.get('name', 'Unknown')
+      disk_model = disk.get('model', 'Unknown')
+      click.echo("- ", nl=False)
+      click.echo(click.style(f"{disk_model} ", fg="cyan"), nl=False)
+      click.echo(click.style(f"({disk_name})", fg="white"))
+      
+      
+@disk.command()
+@click.argument("name", required=False)
+@click.option("--all", is_flag=True, help="Show all disks")
+def info(name, all):
+  disks = get_disks()
+  if all:
+    for disk in disks:
+      print_disk_info(disk)
+  else:
+    if not name:
+      click.echo("Disk name is required if --all is not specified.")
+      return
+    name_lower = name.lower()
+    disk_by_model = next((d for d in disks if d.get('model', '').lower() == name_lower), None)
+    if disk_by_model:
+      print_disk_info(disk_by_model)
+    else:
+      disk_by_name = next((d for d in disks if d.get('name', '').lower() == name_lower), None)
+      if disk_by_name:
+        print_disk_info(disk_by_name)
+        return
+      all_names = [d.get('name', '') for d in disks] + [d.get('model', '') for d in disks]
+      all_names = [n for n in all_names if n] 
+      
+      if all_names:
+        closest = get_close_matches(name_lower, [n.lower() for n in all_names], n=3, cutoff=0.6)
+        if closest:
+          original_matches = [next(n for n in all_names if n.lower() == match) for match in closest]
+          click.echo(f"Disk '{name}' not found. Closest matches: {', '.join(original_matches)}")
+        else:
+          click.echo(f"Disk '{name}' not found.")
+      else:
+        click.echo(f"Disk '{name}' not found.")
 #endregion
 if __name__ == "__main__":
   cli()
