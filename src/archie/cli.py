@@ -11,6 +11,11 @@ def version():
   """Get current installed Archie version"""
   click.echo(f"{importlib.metadata.version('archie')}")
 
+cli.command()
+def help():
+  """Show this message and exit."""
+  click.echo(cli.get_help(click.Context(cli)))
+
 #region env
 @cli.group()
 def env():
