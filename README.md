@@ -1,5 +1,5 @@
 # archie-cli
-## A command line tool to make managing your Arch Linux system easier
+## A command line tool to make managing your Linux system easier
 
 # Features
 - Global environment variable management

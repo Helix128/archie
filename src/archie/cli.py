@@ -31,7 +31,6 @@ def set(key, value):
 
 @env.command()
 @click.argument("key")
-@click.argument("value")
 def remove(key):
   """Remove a global environment variable."""
   del_env_var(key)
