@@ -27,9 +27,10 @@ def set_env_var(var_name, var_value):
             lines = file.readlines()
             for i, line in enumerate(lines):
                 if line.startswith(f"{var_name}="):
-                    if isinstance(var_value, (int, float)):
+                    try:
+                        float(var_value)
                         lines[i] = f'{var_name}={var_value}\n'
-                    else:
+                    except (ValueError, TypeError):
                         lines[i] = f'{var_name}="{var_value}"\n'
                     found = True
                     break
@@ -37,9 +38,10 @@ def set_env_var(var_name, var_value):
         pass
 
     if not found:
-        if isinstance(var_value, (int, float)):
+        try:
+            float(var_value)
             lines.append(f'{var_name}={var_value}\n')
-        else:
+        except (ValueError, TypeError):
             lines.append(f'{var_name}="{var_value}"\n')
 
     content = ''.join(lines)
