@@ -24,13 +24,13 @@ def help():
 #region env
 @cli.group()
 def env():
-  """Manage global environment variables."""
+  """Manage profile environment variables."""
   pass
 
 @env.command()
 @click.argument("key")
 def get(key):
-  """Get a global environment variable value."""
+  """Get an environment variable value."""
   result = get_env_var(key)
   if result is not None:
     click.echo(click.style(f"{key}={result}", fg="white"))
@@ -41,24 +41,24 @@ def get(key):
 @click.argument("key")
 @click.argument("value")
 def set(key, value):
-  """Set a global environment variable."""
+  """Set an environment variable."""
   set_env_var(key, value)
   click.echo(click.style(f"{key}={value}", fg="white"))
 
 @env.command()
 @click.argument("key")
 def delete(key):
-  """Delete a global environment variable."""
+  """Delete an environment variable."""
   del_env_var(key)
   click.echo(click.style(f"Deleted {key}", fg="white"))
 
 @env.command()
 def list():
-  """List all global environment variables."""
+  """List all environment variables."""
   vars = list_env_vars()
   click.echo("Found",nl=False)
   click.echo(click.style(f" {len(vars)} ", fg="cyan"), nl=False)
-  click.echo("global environment variables:")
+  click.echo("environment variables:")
   if vars:
     for var in vars:
       click.echo(click.style(var, fg="white"))
