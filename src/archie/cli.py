@@ -3,8 +3,8 @@ import importlib.metadata
 from difflib import get_close_matches
 
 # archie modules
-from .env import *
-from .disk import *
+from env import *
+from disk import *
 
 @click.group()
 def cli():
@@ -20,6 +20,17 @@ def version():
 def help():
   """Show this message and exit."""
   click.echo(cli.get_help(click.Context(cli)))
+
+@cli.command()
+def about():
+  """About Archie."""
+  click.echo(click.style("Archie version: ", fg="cyan"), nl=False)
+  click.echo(f"{importlib.metadata.version('archie-cli')}")
+  click.echo(click.style("GitHub repo: ", fg="cyan"), nl=False)
+  click.echo("https://github.com/helix128/archie")
+  click.echo("Made with <3 by ",nl=False)
+  click.echo(click.style("Helix128", fg="blue"))
+
 #endregion
 #region env
 @cli.group()
