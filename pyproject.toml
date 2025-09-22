@@ -1,6 +1,6 @@
 [project]
 name = "archie-cli"
-version = "0.6.6" 
+version = "0.6.7" 
 description = "A command line tool to make managing your Linux system easier"
 authors = [
     {name = "Helix128"}
