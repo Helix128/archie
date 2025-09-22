@@ -88,14 +88,18 @@ def get_disks():
 
 
 def print_disk_info(disk):
-    click.echo(click.style(f"{disk["model"]} ({disk["name"].lower()})", fg="cyan"))
-    click.echo(f"Size: {parse_bytes(disk["size"])}")
+    disk_model = disk["model"]
+    disk_name = disk["name"].lower()
+    click.echo(click.style(f"{disk_model} ({disk_name})", fg="cyan"))
+    disk_size = disk["size"]
+    click.echo(f"Size: {parse_bytes(disk_size)}")
 
-    usage_pct = (disk["used"] / disk["size"] * 100) if disk["size"] > 0 else 0
+    disk_used = disk["used"]
+    usage_pct = (disk_used / disk_size * 100) if disk_size > 0 else 0
     usage_color = "white" if usage_pct < 70 else "yellow" if usage_pct < 90 else "red"
 
     click.echo("Used: ", nl=False)
-    click.echo(click.style(f"{parse_bytes(disk["used"])} ({usage_pct:.2f}%)", fg=usage_color))
+    click.echo(click.style(f"{parse_bytes(disk_used)} ({usage_pct:.2f}%)", fg=usage_color))
     click.echo(" [", nl=False)
 
     for i in range(0,20):
@@ -107,8 +111,13 @@ def print_disk_info(disk):
     click.echo("]")
     click.echo(f"Partitions:")
     
-    if disk["partitions"]:
-        for partition in disk["partitions"]:
-            click.echo(f"- {partition["name"].lower()} ({parse_bytes(partition["used"])} / {parse_bytes(partition["size"])}) [{partition["mountpoint"]}]")
+    disk_partitions = disk["partitions"]
+    if disk_partitions:
+        for partition in disk_partitions:
+            partition_name = partition["name"].lower()
+            partition_used = partition["used"]
+            partition_size = partition["size"]
+            partition_mountpoint = partition["mountpoint"]
+            click.echo(f"- {partition_name} ({parse_bytes(partition_used)} / {parse_bytes(partition_size)}) [{partition_mountpoint}]")
     else:
         click.echo(click.style("None", fg="yellow"))

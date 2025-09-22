@@ -47,5 +47,5 @@ type = ["mypy (>=1.14.1)"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.13"
+python-versions = ">=3.11"
 content-hash = "181d7fd307e9f98adc86775aec772ce8f452bc12033f6bbe3a84408122c452af"
