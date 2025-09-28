@@ -30,7 +30,7 @@ archie env list
 archie env set TEST_ENV 25 # TEST_ENV=25
 archie env set SECRET_KEY my_api_key # SECRET_KEY="my_api_key"
 # For string values with spaces, use quotes
-archie env set TARGET_DISTRO "Linux Mint" # TARGET_DISTRO="Linux Mint"
+archie env set BEST_GAME "Risk of Rain 2" # BEST_GAME="Risk of Rain 2"
 
 ## Disk module (disk)
 # List available disks
