@@ -65,7 +65,3 @@ archie pls "disk all"
 archie task locate
 
 ```
-
-# Why?
-I began using Arch (btw) recently and while it has a **ton** of tools available to configure the system, I did not find a tool for editing env variables *"quickly"* (by quickly, i mean not needing me to manually go to the file and edit it myself, I'm used to the Windows way of doing some things). So at first I made this tool to do just that. Call it laziness if you want (it is), I just wanted a quick way to do it and I hope someone else finds it useful as well. In the end, its a wrapper around some common Linux commands with a bit of extra functionality to make them more readable and noob-friendly.
-
